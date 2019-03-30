@@ -6,6 +6,7 @@
 	Portfolio/resume site
 	Date: Sat Mar 23 13:02:50 PDT 2019
 	modernizr script is linked at bottom of document with other dependencies.
+	Added calculate gpa function before /body to show the average gpa from both schools
   -->
 
   <meta charset="utf-8">
@@ -13,17 +14,14 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Paul's Resume site</title>
+  <title>Portfolio Resume</title>
 
-  <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
   <link href="css/resume.min.css" rel="stylesheet">
 
 </head>
@@ -68,7 +66,7 @@
         <h1 class="mb-0">Paul
           <span class="text-primary">Nguyen</span>
         </h1>
-        <div class="subheading mb-5">125 Cambon Drive San Francisco, CA 94132 ·(415) 515-0551 ·
+        <div class="subheading mb-5">125 Cambon Drive San Francisco, CA 94132 ·(408) 515-0551 ·
           <a href="mailto:name@email.com">paulngu1120@email.com</a>
         </div>
         <p class="lead mb-5">I am a prospective web developer, enthusiatic about all things web and technology! I am experienced in many front-end and back-end frameworks, and excel in proactive collaboration in solving the toughest development issues.    </p>
@@ -97,7 +95,7 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">Senior Developer/Quality Assurance</h3>
+            <h3 class="mb-0">Developer/Quality Assurance</h3>
             <div class="subheading mb-3">HCL Technologies Inc @ YouTube</div>
 	    <p>Plan, automate, and execute test strategies and scripts for functionality of HTML, CSS, Javascript, and Network security protocols for brand devices that intend to market the YouTube Application on their product. This involves compilation of performance, functionality, features, and hardware specs on all devices against specific technical requirements of YouTube Inc.</p>
           </div>
@@ -138,6 +136,11 @@
             <span class="text-primary">January 2017 - Dec 2019</span>
           </div>
         </div>
+
+	<div class="resume-item d-flex flex-column flex-md-row justify-content-between">
+	<input type="button" id="submit" value="Average GPA of both Schools">
+	<p id=avg_gpa></p>
+	</div>
 
       </div>
     </section>
@@ -224,6 +227,7 @@
         <ul class="fa-ul mb-0">
           <li>
             <i class="fa-li fa fa-trophy text-warning"></i>
+	    <b>HCL Certificate of Excellence:</b> Managing complex assignments 2018-2019
             </li>
           <li>
             <i class="fa-li fa fa-trophy text-warning"></i>
@@ -248,6 +252,14 @@
   <!-- Modernize compatibility issues -->
   <script src="vendor/modernizr.custom.05819.js"></script>
 
+ <script>
+	 function calcGPA(){
+		 var bothGPA = (3.24 + 3.56) / 2;
+		 document.getElementById("avg_gpa").innerHTML = bothGPA;
+	 };
+	
+	document.getElementById("submit").addEventListener("click", calcGPA, false);
+ </script>
 </body>
 
 </html>
