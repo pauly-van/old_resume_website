@@ -70,13 +70,13 @@
           <div class="resume-content">
           </div>
   	<form>
-	    <label for="fname">First Name</label>
+	    <label for="fname" id="firstResp">First Name</label>
 	    <input type="text" id="fname" name="firstname" placeholder="Your name..">
 	
-	    <label for="lname">Last Name</label>
+	    <label for="lname" id="lastResp">Last Name</label>
 	    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
 
-	    <label for='email'>Email</label>
+	    <label for='email' id="mailResp">Email</label>
 	    <input type='text' id='email' name='email' placeholder="Your email address..">
 	
 	    <label for="subject">Subject</label>
@@ -103,32 +103,113 @@
   <script src="vendor/modernizr.custom.05819.js"></script>
 
   <script>
-	function chkForm(){
-		var missing=[];
-		var formarr=["First name ", " Last name", " Email"];
-		var formcyc=document.getElementsByTagName("input");
+	var displayfirst = document.getElementById("firstResp");
+	var displaylast = document.getElementById("lastResp");
+	var displaymail = document.getElementById("mailResp");
+	var firstname = document.getElementById("fname");
+	var lastname = document.getElementById("lname");
+	var email = document.getElementById("email");
+	var messagetxt = "";
 
-		for(var i=0;i<3;i++){
-			if(formcyc[i].value==""){
-				missing[i]=formarr[i];
-			}else if(formcyc[i].value){
+	function verifyFrm(){ 
+		var inpcount=0;
+		var very = document.getElementsByTagName("input");
+		for(var n=0;n<3;n++){		
+			if(very[n].value){
+				inpcount++;
+			}else{
 				continue;
-			}		
-		}
-		if(missing.length!=4){
-			alert("Please fill in "+missing+"!");
+			}
+		}//checks to see if input tags are filled in after hitting submit button; If not sends alert to window
+		if(inpcount!=3){
+			window.alert("Please completely fill out form!");
 		}else{
-			alert("Thanks for contacting me!");
-		}
-		missing=[];
+			window.alert("Thanks for contacting me!");
+		}//else thank you note
 	}
-				
+
+	function chkFirst(){
+		try{
+			if(firstname.value === ""){
+				throw "Please enter your first name!";
+			}
+		}
+		catch(firstnameError){
+			messagetxt=firstnameError;
+			displayfirst.innerHTML=messagetxt;
+			changeTag(displayfirst, "h5");
+		}
+
+	}//while out of focus checks to see if string in field; if not change label input to h5 tag with message to add
+
+	function chkLast(){
+		try{
+			if(lastname.value === ""){
+				throw "Please enter your last name!";
+			}
+		}	
+		catch(lnameError){
+			messagetxt=lnameError;
+			displaylast.innerHTML=messagetxt;
+			changeTag(displaylast, "h5");
+		}
+	}//while out of focus checks to see if string in field; if not change label input to h5 tag with message to add
+
+	function chkMail(){
+		try{
+			if(email.value === ""){
+				throw "Please enter your email!";
+			}
+		}
+		catch(emailError){
+			messagetxt=emailError;
+			displaymail.innerHTML=messagetxt;
+			changeTag(displaymail, "h5");
+		}
+	}//while out of focus checks to see if string in field; if not change label input to h5 tag with message to add
+
+	function changeTag(from, to){
+		var n = document.createElement(to);
+		var attr = from.attributes;
+		for(var i=0;i<attr.length;i++){
+			n.setAttribute(attr[i].name, attr[i].value);
+		}
+		n.innerHTML=from.innerHTML;
+		from.parentNode.replaceChild(n, from);
+	}// function that changes html tag in document
+	
+	function createList(){
+		if(firstname.addEventListener){
+			firstname.addEventListener("blur", chkFirst, false);
+		}else if(firstname.attachEvent){
+			firstname.attachEvent("onblur", chkFirst);
+		}
+		if(lastname.addEventListener){
+			lastname.addEventListener("blur", chkLast, false);
+		}else if(lastname.attachEvent){
+			lastname.attachEvent("onblur", chkFirst);
+		}
+		if(email.addEventListener){
+			email.addEventListener("blur", chkMail, false);
+		}else if(email.attachEvent){
+			email.attachEvent("onblur", chkMail);
+		}
+	}//event listeners to all input fields
+		
+	if(window.addEventListener){
+		window.addEventListener("load", createList, false);
+	}else if(window.attachEvent){
+		window.attachEvent("onload", createList);
+	}//document load listener
+
 	var sub=document.getElementById("fsubmit");
 	if(sub.addEventListener){
-		sub.addEventListener("click", chkForm, false);
+		sub.addEventListener("click", verifyFrm, false);
 	}else if(sub.attachEvent){
-		sub.attachEvent("onclick", chkForm);
-	}	
+		sub.attachEvent("onclick", verifyFrm);
+	}//submit button listener
+
+/*This checks my contact form to see if user has left a string value in the field before going out of focus, a innerHTML will change the value on top of its location. Also a alert will prompt if first, last, and email is missing after pressing the submit button */
   </script>
 </body>
 
