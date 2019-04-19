@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Paul Nguyen
+	Portfolio/resume site
+	Date: Fri Apr 19 11:50:44 PDT 2019
+	modernizr script is linked at bottom of document with other dependencies.
+  -->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Portfolio Resume</title>
+
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+  <link href="css/resume.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      <span class="d-block d-lg-none">Paul Nguyen</span>
+      <span class="d-none d-lg-block">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profilepic.png" alt="">
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="index.html#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="index.html#experience">Experience</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="index.html#education">Education</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="index.html#skills">Skills</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
+        </li>
+	<li class="nav-item">
+	 <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
+	</li>
+      </ul>
+    </div>
+  </nav>
+  <nav class="top-nav-item">
+	<a href="index.html">Home</a>
+	<a href="contact.html">Contact</a>
+  </nav>
+
+
+  <section class="resume-section p-3 p-lg-5 d-flex align-items-center">
+	  <div class="resume-content">
+		  <h3 class="mb-0">Web Safety Matters, Protect yourself!</h3><br>
+  <h3 class="subheading mb-3">Here is your web browser information and Screen size</h3>
+
+  <p id="appN"></p>
+  <p id="appV"></p>
+  <p id="appP"></p>
+  <p id="appUA"></p>
+  <p id="screenW"></p>
+  <p id="screenH"></p>
+  <br>
+  <h3 class="subheading mb-3">Some Educational links</h3>
+  <a href="https://www.vcpi.com/blog/best-practices-for-secure-web-browsing">www.vcpi.com</a>
+  <p>Here is a blog that gives a list of recommendations for safely browsing the web!</p>
+  <a href="https://arstechnica.com/information-technology/2013/08/how-easy-is-it-to-hack-javascript-in-a-browser/">www.arstechnica.com</a>
+  <p>This site explains how easy it is to hack with javascript explaining vulernabilities.</p>
+  <a href="https://www.russharvey.bc.ca/resources/websecurity.html">www.russharvey.bc.ca</a>
+  <p>This one deeply explains the vulernabilities of web browsers and how to defend yourself.
+	  </div>
+
+  </section>
+    <hr class="m-0">
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/resume.min.js"></script>
+	
+
+  <!-- Modernize compatibility issues -->
+  <script src="vendor/modernizr.custom.05819.js"></script>
+
+  <script>
+	  var getBrowser = document.getElementById("appN");
+	  var getVer = document.getElementById("appV");
+	  var getPlat = document.getElementById("appP");
+	  var getUA = document.getElementById("appUA");
+	  var getWidth = document.getElementById("screenW");
+	  var getHeight = document.getElementById("screenH");
+
+	  function chkinfo(){
+		getBrowser.innerHTML = "Web Browser: " + navigator.appName; 
+		getVer.innerHTML = "Browser version: " + navigator.appVersion; 
+		getPlat.innerHTML = "Browser Platform: " + navigator.platform; 
+		getUA.innerHTML = "User Agent: " + navigator.userAgent; 
+		getWidth.innerHTML = "Display width: " + screen.width; 
+		getHeight.innerHTML = "Display Height: " + screen.height; 
+		}
+
+
+	  if(window.addEventListener){
+		  window.addEventListener("load", chkinfo, false);
+	  }else if(window.attachEvent){
+		  window.attachEvent("onload", chkinfo);
+	  }
+  </script>
+</body>
+
+</html>
