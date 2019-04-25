@@ -40,6 +40,12 @@ p.lead{
 	font-family:'Saira Extra Condensed',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';font-size:1.5rem
 }
 
+.center{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+
 .social-icons a{
 	display:inline-block;height:3.5rem;width:3.5rem;background-color:#495057;
 	color:#fff!important;border-radius:100%;
@@ -84,6 +90,7 @@ p.lead{
 }
 .top-nav-item a{
 	text-decoration:none;
+	padding: 10px;
 }
 input[type=text], select, textarea{
   width: 100%; 
@@ -207,7 +214,7 @@ section.resume-section .resume-item .resume-date{
 }
 
 a{
-	color:#bd5d38
+	color:#bd5d38;
 }
 
 a:active,a:focus,a:hover{
