@@ -71,17 +71,20 @@
           <div class="resume-content">
           </div>
   	<form>
-	    <label for="fname" id="firstResp">First Name</label>
-	    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+		<input type="radio" name="title">Mr.</input>
+		<input type="radio" name="title">Mrs.</input>
+		<input type="radio" name="title">Ms.</input>
+		<input type="radio" name="title">Dr.</input>
+		<input type="radio" name="title">Prof.</input>
+		<br><br>
+	    <label for="fname" id="firstResp">Full Name</label>
+	    <input type="text" id="fname" class="fields" name="fullname" pattern="^(\w\w+)\s(\w+)$" required="true" placeholder="Your full name..">
 	
-	    <label for="lname" id="lastResp">Last Name</label>
-	    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
 	    <label for='email' id="mailResp">Email</label>
-	    <input type='text' id='email' name='email' placeholder="Your email address..">
+	    <input type='text' id='email' class="fields" type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="true" placeholder="Your email address..">
 	
-	    <label for="subject">Subject</label>
-	    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+	    <label for="subject" id="subjectResp">Subject</label>
+	    <textarea id="subject" class="fields" name="subject" required="true" placeholder="Write something.." style="height:200px"></textarea>
 	
 	    <input type="submit" value="Submit" id="fsubmit">	
 	  </form>
@@ -105,34 +108,45 @@
 
   <script>
 	var displayfirst = document.getElementById("firstResp");
-	var displaylast = document.getElementById("lastResp");
 	var displaymail = document.getElementById("mailResp");
-	var firstname = document.getElementById("fname");
-	var lastname = document.getElementById("lname");
+	var displaysub = document.getElementById("subjectResp");
+	var fullname = document.getElementById("fname");
 	var email = document.getElementById("email");
+	var textbox = document.getElementById("subject");
+	var radio = document.getElementsByName("title");
 	var messagetxt = "";
-
-	function verifyFrm(){ 
-		var inpcount=0;
-		var very = document.getElementsByTagName("input");
-		for(var n=0;n<3;n++){		
-			if(very[n].value){
-				inpcount++;
+	var chk1 = false;
+	var chk2 = false;
+	var chk3 = false;
+	
+	
+	function verifyFrm(){
+		var totradio=0;
+		if(email.valueMissing){
+			setCustomValidity("Please fill out this field.");
+		}else if(fullname.valueMissing){
+			setCustomValidity("Please fill out this field.");
+		}else if(textbox.valueMissing){
+			setCustomValidity("Please fill out this field.");
+		}
+		for(var i=0;i<5;i++){
+			if(radio[i].checked){
+				totradio++;
+				break;
 			}else{
 				continue;
 			}
-		}//checks to see if input tags are filled in after hitting submit button; If not sends alert to window
-		if(inpcount!=3){
-			window.alert("Please completely fill out form!");
-		}else{
-			window.alert("Thanks for contacting me!");
-		}//else thank you note
+		}
+		
+		if(totradio==0){
+			window.alert("Specify Title");
+		}
 	}
 
 	function chkFirst(){
 		try{
-			if(firstname.value === ""){
-				throw "Please enter your first name!";
+			if(fullname.value === ""&& chk1==false){
+				throw "Enter your full name!";
 			}
 		}
 		catch(firstnameError){
@@ -140,26 +154,13 @@
 			displayfirst.innerHTML=messagetxt;
 			changeTag(displayfirst, "h5");
 		}
-
+		chk1=true;	
 	}//while out of focus checks to see if string in field; if not change label input to h5 tag with message to add
-
-	function chkLast(){
-		try{
-			if(lastname.value === ""){
-				throw "Please enter your last name!";
-			}
-		}	
-		catch(lnameError){
-			messagetxt=lnameError;
-			displaylast.innerHTML=messagetxt;
-			changeTag(displaylast, "h5");
-		}
-	}//while out of focus checks to see if string in field; if not change label input to h5 tag with message to add
-
+	
 	function chkMail(){
 		try{
-			if(email.value === ""){
-				throw "Please enter your email!";
+			if(email.value === ""&&chk2==false){
+				throw "Enter your email!";
 			}
 		}
 		catch(emailError){
@@ -167,7 +168,22 @@
 			displaymail.innerHTML=messagetxt;
 			changeTag(displaymail, "h5");
 		}
+		chk2=true;	
 	}//while out of focus checks to see if string in field; if not change label input to h5 tag with message to add
+	
+	function chksubj(){
+		try{
+			if(textbox.value === ""&&chk3==false){
+				throw "Enter your message!";
+			}
+		}
+		catch(messgError){
+			messagetxt=messgError;
+			displaysub.innerHTML=messagetxt;
+			changeTag(displaysub, "h5");
+		}
+		chk3=true;
+	}
 
 	function changeTag(from, to){
 		var n = document.createElement(to);
@@ -180,22 +196,28 @@
 	}// function that changes html tag in document
 	
 	function createList(){
-		if(firstname.addEventListener){
-			firstname.addEventListener("blur", chkFirst, false);
-		}else if(firstname.attachEvent){
-			firstname.attachEvent("onblur", chkFirst);
-		}
-		if(lastname.addEventListener){
-			lastname.addEventListener("blur", chkLast, false);
-		}else if(lastname.attachEvent){
-			lastname.attachEvent("onblur", chkFirst);
+		if(fullname.addEventListener){
+			fullname.addEventListener("blur", chkFirst, false);
+		}else if(fullname.attachEvent){
+			fullname.attachEvent("onblur", chkFirst);
 		}
 		if(email.addEventListener){
 			email.addEventListener("blur", chkMail, false);
 		}else if(email.attachEvent){
 			email.attachEvent("onblur", chkMail);
 		}
-	}//event listeners to all input fields
+		if(textbox.addEventListener){
+			textbox.addEventListener("blur", chksubj, false);
+		}else if(textbox.attachEvent){
+			textbox.attachEvent("onblur", chksubj);
+		}
+		var sub = document.getElementById("fsubmit");
+		if(sub.addEventListener){
+			sub.addEventListener("click", verifyFrm, false)
+		}else if(sub.attachEvent){
+			sub.attachEvent("onclick", verifyFrm);
+		}//event listeners to all input fields
+	}
 		
 	if(window.addEventListener){
 		window.addEventListener("load", createList, false);
@@ -203,13 +225,7 @@
 		window.attachEvent("onload", createList);
 	}//document load listener
 
-	var sub=document.getElementById("fsubmit");
-	if(sub.addEventListener){
-		sub.addEventListener("click", verifyFrm, false);
-	}else if(sub.attachEvent){
-		sub.attachEvent("onclick", verifyFrm);
-	}//submit button listener
-
+	
   </script>
 </body>
 

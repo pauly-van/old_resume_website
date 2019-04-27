@@ -71,6 +71,10 @@ p.lead{
 	color:#bd5d38
 }
 
+.fields:invalid{
+	background: rgb(255,233,233);
+}
+
 #sideNav .navbar-nav .nav-item .nav-link{
 	font-weight:800;
 	letter-spacing:.05rem;
